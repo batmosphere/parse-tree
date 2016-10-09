@@ -10,23 +10,21 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	char c = 'x';
 	char *infix;
-	char prefix[1000];
+	char prefix[10000];
+	char newinfix[10000];
 	Node *root = new Node();
 	infix = argv[1];
 	Parser parser;
-	cout<<endl;
 	parser.infixToPrefix(infix,prefix);
-	cout<<"Prefix Length: "<<strlen(prefix)<<endl;
-	cout<<infix<<endl;
-	cout<<prefix<<endl;
 	parser.prefixToTree(prefix,root);
-	parser.treeToInfix(root);
+	parser.treeToInfix(root,newinfix);
 	int maxheight = parser.getTreeHeight(root);
-	
-	cout<<endl;
-	cout<<"Height: "<<maxheight<<endl;
-	bool rval = parser.evaluateTree(root);
-	cout<<"Truth Value: "<<rval<<endl;
-	cout<<endl;
+	bool truthvalue = parser.evaluateTree(root);
+	cout<<"Prefix Length: "<<strlen(prefix)<<endl;
+	cout<<"Infix String: "<<infix<<endl;
+	cout<<"Prefix String: "<<prefix<<endl;
+	cout<<"New Infix String: "<<newinfix<<endl;
+	cout<<"Tree Height: "<<maxheight<<endl;
+	cout<<"Truth Value: "<<truthvalue<<endl;
 	return 0;
 }

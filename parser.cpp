@@ -9,6 +9,7 @@ private:
 	Node *root;
 	char *infix;
 	char *prefix;
+	char newinfix[10000];
 	int prefixlength;
 	int currentindex;
 	int maxheight;
@@ -109,6 +110,15 @@ private:
 		return currentmaxheight + 1;
 	}
 
+	bool infixCalculator(Node *node,char *infix) {
+		if (node != NULL) {
+			infixCalculator(node->getLeft(),infix);
+			infix[currentindex++]=node->getData();
+			infixCalculator(node->getRight(),infix);
+		}
+		return true;
+	}
+
 public:
 	bool infixToPrefix(char *infix, char *prefix) {
 		Helper helper;
@@ -158,12 +168,11 @@ public:
 		insertNode(root);
 	}
 
-	bool treeToInfix(Node *node) {
-		if (node != NULL) {
-			treeToInfix(node->getLeft());
-			cout << node->getData();
-			treeToInfix(node->getRight());
-		}
+	bool treeToInfix(Node *node, char *infix) {
+		currentindex=0;
+		//this->newinfix = infix;
+		infixCalculator(node,infix);
+		infix[currentindex]='\0';
 		return true;
 	}
 
