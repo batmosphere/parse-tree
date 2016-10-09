@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<title>Parse Tree Implementation</title>
+		<link href="lib/prism.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="index.css">
+		<script src="lib/prism.js"></script>
 		<script type="text/javascript" src="index.js"></script>
 	</head>
 	<body>
 		<div id="page-holder">
 			<div id="header-holder">
 				<div id="header">
-
+					<h1 id="title">Parse Tree Implementation</h1>
+					<p id="description">Assignment by Mukund Kothari, Sanyam Jain and Raunak Ritesh.</p>
 				</div>
 			</div>
 			<div id="content-holder">
 				<div id="content">
-					<div id="tabbar">
-						
+					<div id="tab-bar">
+						<p class="tab-title selected" id="main-title" onclick="loadPage('main')">main.cpp</p>
+						<p class="tab-title" id="helper-title" onclick="loadPage('helper')">helper.cpp</p>
+						<p class="tab-title" id="node-title" onclick="loadPage('node')">node.cpp</p>
+						<p class="tab-title" id="parser-title" onclick="loadPage('parser')">parser.cpp</p>
+						<p class="tab-title" id="output-title" onclick="loadPage('output')">output</p>
+						<p class="tab-title" id="analysis-title" onclick="loadPage('analysis')">analysis</p>
 					</div>
 					<div id="tabs">
-						<div class="tab" id="main">
-
+						<div class="tab language-cpp" id="main">
+							<pre><code class="language-cpp" id="main-code"></code></pre>
 						</div>
-						<div class="tab" id="helper">
-
+						<div class="tab hidden" id="helper">
+							<pre><code class="language-cpp" id="helper-code"></code></pre>
 						</div>
-						<div class="tab" id="node">
-
+						<div class="tab hidden" id="node">
+							<pre><code class="language-cpp" id="node-code"></code></pre>
 						</div>
-						<div class="tab" id="parser">
-
+						<div class="tab hidden" id="parser">
+							<pre><code class="language-cpp" id="parser-code"></code></pre>
 						</div>
-						<div class="tab" id="output">
-
+						<div class="tab hidden" id="output">
+							<pre><code class="language-cpp" id="output-code"></code></pre>
+						</div>
+						<div class="tab hidden" id="analysis">
+							<pre><code class="language-cpp" id="analysis-code"></code></pre>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="footer-holder">
 				<div id="footer">
-
+					<p>Website by Rohitt Vashishtha</p>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,123 @@
+body {
+    margin-top: 0;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    width: 100vw;
+    height: 100vh;
+    color: #ddd;
+    overflow: hidden;
+    font-family: Impact, Charcoal, sans-serif;
+    background-image: url('http://www.dplc2016.org/wp-content/uploads/2015/10/campus-view-1010x500.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#tab-bar {
+	margin: 0;
+	display: inline-flex;
+	margin-bottom: 10px;
+	height: 30px;
+	padding: 0;
+	width: 100%;
+}
+
+.tab-title {
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0;
+	margin-top: 10%;
+	padding-top:30%;
+	padding-bottom: 30%;
+	margin-bottom:30%;
+	padding-bottom: 0;
+	height: 100%;
+	border-radius: 5px;
+	width: 20%;
+	text-align: center;
+}
+
+.tab-title:hover {
+	background: rgba(80, 0, 40, 0.7);
+}
+
+#page-holder {
+    height: 98vh;
+    width: 100vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#page-holder > div {
+	width: 80vw;
+	margin: 0px;
+}
+
+#header-holder {
+    background-color: #000;
+    border-radius: 20px 20px 0px 0px;
+}
+
+#content-holder {
+	background-color: rgba(0,0,0,0.8);
+}
+
+#footer-holder {
+    background-color: #000;
+    border-radius: 0px 0px 20px 20px;
+}
+
+#header {
+	margin: 0;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px; 
+	text-align: center;
+}
+
+#content {
+	margin: 0;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px; 
+}
+
+#footer {
+	margin: 0;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px; 
+	text-align: center;
+}
+
+#title {
+	color: #ddd;
+}
+
+#description {
+	color: #ccc;
+}
+
+.pre {
+	margin: 1%;
+	width: 98%;
+}
+
+.hidden {
+	display: none;
+}
+
+.selected {
+	background: #111;
+}
+
+pre {
+	background: rgba(0,0,0,0.7) !important;
+	border-width: 0;
+}
