@@ -1,10 +1,20 @@
 class Node {
 private:
 	char data;
+	int index;
 	Node *left, *right, *parent;
 public:
 	Node(char data) {
 		this->data = data;
+		this->index = 0;
+		this->left = NULL;
+		this->right = NULL;
+		this->parent = NULL;
+	}
+
+	Node() {
+		this->data = '\0';
+		this->index = 0;
 		this->left = NULL;
 		this->right = NULL;
 		this->parent = NULL;
@@ -15,6 +25,12 @@ public:
 	}
 	void setData(char data) {
 		this->data = data;
+	}
+	int getIndex() {
+		return this->index;
+	}
+	void setIndex(int index) {
+		this->index = index;
 	}
 	Node *getLeft() {
 		return this->left;

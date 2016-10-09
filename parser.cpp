@@ -9,9 +9,11 @@ private:
 	Node *root;
 	char *infix;
 	char *prefix;
-	char stack[1000];
+	int prefixlength,currentindex;
+	char stack[10000];
 	//char *stack;
 	int tp;
+
 	void push(char elem)
 	{	/* Function for PUSH operation */
 		stack[++tp] = elem;
@@ -24,17 +26,64 @@ private:
 	{	/* Function for precedence */
 		switch (elem)
 		{
-			case '#': return 0;
-			case ')': return 1;
-			case '~': return 2;
-			case '*': return 3;
-			case '+': return 4;
-			case '>': return 5;
+		case '#': return 0;
+		case ')': return 1;
+		case '~': return 2;
+		case '*': return 3;
+		case '+': return 4;
+		case '>': return 5;
 		}
 	}
 
+	bool isOperator(char ch)
+	{
+		return ch == '+' || ch == '>' || ch == '*' || ch == '~';
+	}
+
+	bool insertNode(Node *node) {
+		char ch = prefix[currentindex];
+		cout<<"Current: "<< currentindex<<" "<<ch<< endl;
+		cout<<"\tParent: "<<node->getIndex()<<" "<<node->getData()<<endl;
+		if(isOperator(ch)){
+			if(node->getLeft()==NULL){
+				Node *newNode = new Node(ch);
+				newNode->setIndex(currentindex);
+				node->setLeft(newNode);
+				cout<<"\t\tLeft: "<<newNode->getData()<<endl;
+				insertNode(newNode);
+				insertNode(node);
+			}
+			else if(node->getRight()==NULL && node->getData()!='~'){
+				Node *newNode = new Node(ch);
+				newNode->setIndex(currentindex);
+				node->setRight(newNode);
+				cout<<"\t\tRight: "<<newNode->getData()<<endl;
+				insertNode(newNode);
+			}
+			else{
+				return true;
+			}
+		}
+		if(isalpha(ch)){
+			if(node->getLeft()==NULL){
+				Node *newNode = new Node(ch);
+				newNode->setIndex(currentindex-1);
+				node->setLeft(newNode);
+				cout<<"\t\tLeft: "<<newNode->getData()<<endl;
+				insertNode(node);
+			}
+			else if(node->getRight()==NULL && node->getData()!='~'){
+				Node *newNode = new Node(ch);
+				newNode->setIndex(currentindex-1);
+				node->setRight(newNode);
+				cout<<"\t\tRight: "<<newNode->getData()<<endl;
+			}
+			return true;
+		}
+		return true;
+	}
 public:
-	bool infixToPrefix(char *infix, char prefix[1000]) {
+	bool infixToPrefix(char *infix, char *prefix) {
 		Helper helper;
 		tp = -1;
 		char ch;
@@ -73,5 +122,22 @@ public:
 		helper.reverse(prefix);
 		helper.reverse(infix);
 		return true;
+	}
+
+	bool prefixToTree(char *prefix, Node *root) {
+		this->prefixlength = strlen(prefix);
+		this->prefix = prefix;
+		currentindex=1;
+		root->setData(prefix[0]);
+		root->setIndex(0);
+		insertNode(root);
+		// for (int i = 1; i < length; i++) {
+		// 	ch = prefix[i];
+		// 	insertNode(ch, root);
+			// if (isalpha(ch)){
+			// 	Node *ptr = new Node(ch);
+			// 	//TODO push to tree.
+			// }
+		// }
 	}
 };

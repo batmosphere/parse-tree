@@ -11,17 +11,14 @@ int main(int argc, char *argv[]) {
 	char c = 'x';
 	char *infix;
 	char prefix[1000];
+	Node *root = new Node();
 	infix = argv[1];
-	cout<<infix<<endl;
-	// Helper helper;
-	// helper.reverse(infix);
 	Parser parser;
 	parser.infixToPrefix(infix,prefix);
-	// prefix[0]='h';
-	// prefix[1]='h';
-	// prefix[2]='h';
-	//cout<<infix<<endl;
+	cout<<endl;
+	cout<<infix<<endl;
 	cout<<prefix<<endl;
-	//Node *root = new Node(c);
+	cout<<endl;
+	parser.prefixToTree(prefix,root);
 	return 0;
 }
