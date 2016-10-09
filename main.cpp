@@ -16,9 +16,12 @@ int main(int argc, char *argv[]) {
 	Parser parser;
 	parser.infixToPrefix(infix,prefix);
 	cout<<endl;
+	cout<<"Prefix Length: "<<strlen(prefix)<<endl;
 	cout<<infix<<endl;
 	cout<<prefix<<endl;
 	cout<<endl;
 	parser.prefixToTree(prefix,root);
+	parser.treeToInfix(root);
+	cout<<endl;
 	return 0;
 }

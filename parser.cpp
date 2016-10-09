@@ -46,16 +46,18 @@ private:
 		cout<<"\tParent: "<<node->getIndex()<<" "<<node->getData()<<endl;
 		if(isOperator(ch)){
 			if(node->getLeft()==NULL){
+				currentindex++;
 				Node *newNode = new Node(ch);
-				newNode->setIndex(currentindex);
+				newNode->setIndex(currentindex-1);
 				node->setLeft(newNode);
 				cout<<"\t\tLeft: "<<newNode->getData()<<endl;
 				insertNode(newNode);
 				insertNode(node);
 			}
 			else if(node->getRight()==NULL && node->getData()!='~'){
+				currentindex++;
 				Node *newNode = new Node(ch);
-				newNode->setIndex(currentindex);
+				newNode->setIndex(currentindex-1);
 				node->setRight(newNode);
 				cout<<"\t\tRight: "<<newNode->getData()<<endl;
 				insertNode(newNode);
@@ -66,6 +68,7 @@ private:
 		}
 		if(isalpha(ch)){
 			if(node->getLeft()==NULL){
+				currentindex++;
 				Node *newNode = new Node(ch);
 				newNode->setIndex(currentindex-1);
 				node->setLeft(newNode);
@@ -73,6 +76,7 @@ private:
 				insertNode(node);
 			}
 			else if(node->getRight()==NULL && node->getData()!='~'){
+				currentindex++;
 				Node *newNode = new Node(ch);
 				newNode->setIndex(currentindex-1);
 				node->setRight(newNode);
@@ -115,10 +119,8 @@ public:
 		while ( stack[tp] != '#') {
 			/* Pop from stack till empty */
 			prefix[k++] = pop();
-			//cout<< pop();
 		}
 		prefix[k] = '\0'; /* Make prfx as valid string */
-		//cout<<"\nOVER\n";
 		helper.reverse(prefix);
 		helper.reverse(infix);
 		return true;
@@ -131,13 +133,14 @@ public:
 		root->setData(prefix[0]);
 		root->setIndex(0);
 		insertNode(root);
-		// for (int i = 1; i < length; i++) {
-		// 	ch = prefix[i];
-		// 	insertNode(ch, root);
-			// if (isalpha(ch)){
-			// 	Node *ptr = new Node(ch);
-			// 	//TODO push to tree.
-			// }
-		// }
+	}
+
+	bool treeToInfix(Node *node){
+		if(node!=NULL){
+			treeToInfix(node->getLeft());
+			cout<<node->getData();
+			treeToInfix(node->getRight());
+		}
+		return true;
 	}
 };
