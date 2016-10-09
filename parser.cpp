@@ -110,11 +110,11 @@ private:
 		return currentmaxheight + 1;
 	}
 
-	bool infixCalculator(Node *node,char *infix) {
+	bool infixCalculator(Node *node, char *infix) {
 		if (node != NULL) {
-			infixCalculator(node->getLeft(),infix);
-			infix[currentindex++]=node->getData();
-			infixCalculator(node->getRight(),infix);
+			infixCalculator(node->getLeft(), infix);
+			infix[currentindex++] = node->getData();
+			infixCalculator(node->getRight(), infix);
 		}
 		return true;
 	}
@@ -169,10 +169,10 @@ public:
 	}
 
 	bool treeToInfix(Node *node, char *infix) {
-		currentindex=0;
+		currentindex = 0;
 		//this->newinfix = infix;
-		infixCalculator(node,infix);
-		infix[currentindex]='\0';
+		infixCalculator(node, infix);
+		infix[currentindex] = '\0';
 		return true;
 	}
 
@@ -182,40 +182,40 @@ public:
 		return maxheight;
 	}
 
-	bool evaluateTree(Node *node){
-		bool var1=false;
-		bool var2=false;
-		char ch= node->getData();
+	bool evaluateTree(Node *node) {
+		bool var1 = false;
+		bool var2 = false;
+		char ch = node->getData();
 
-		if (isOperator(ch) && ch=='~') {
+		if (isOperator(ch) && ch == '~') {
 			var1 = evaluateTree(node->getLeft());
 		}
 		else if (isOperator(ch)) {
 			var1 = evaluateTree(node->getLeft());
 			var2 = evaluateTree(node->getRight());
 		}
-		else if(isalpha(ch)){
-			if(ch=='t'||ch=='T'){
+		else if (isalpha(ch)) {
+			if (ch == 't' || ch == 'T') {
 				return true;
 			}
 			return false;
 		}
-		
+
 		bool result;
 
-		switch(ch){
-			case '+':
-				result = var1 || var2;
-				break;
-			case '*':
-				result = var1 && var2;
-				break;
-			case '~':
-				result = !var1;
-				break;
-			case '>':
-				result = !var1||var2;
-				break;
+		switch (ch) {
+		case '+':
+			result = var1 || var2;
+			break;
+		case '*':
+			result = var1 && var2;
+			break;
+		case '~':
+			result = !var1;
+			break;
+		case '>':
+			result = !var1 || var2;
+			break;
 		}
 		return result;
 	}
