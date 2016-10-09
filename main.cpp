@@ -14,14 +14,17 @@ int main(int argc, char *argv[]) {
 	Node *root = new Node();
 	infix = argv[1];
 	Parser parser;
-	parser.infixToPrefix(infix,prefix);
 	cout<<endl;
+	parser.infixToPrefix(infix,prefix);
 	cout<<"Prefix Length: "<<strlen(prefix)<<endl;
 	cout<<infix<<endl;
 	cout<<prefix<<endl;
-	cout<<endl;
 	parser.prefixToTree(prefix,root);
-	parser.treeToInfix(root);
+	//parser.treeToInfix(root);
+	int maxheight = parser.getTreeHeight(root);
+	
+	cout<<endl;
+	cout<<"Height: "<<maxheight<<endl;
 	cout<<endl;
 	return 0;
 }

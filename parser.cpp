@@ -9,7 +9,9 @@ private:
 	Node *root;
 	char *infix;
 	char *prefix;
-	int prefixlength,currentindex;
+	int prefixlength;
+	int currentindex;
+	int maxheight;
 	char stack[10000];
 	//char *stack;
 	int tp;
@@ -42,15 +44,15 @@ private:
 
 	bool insertNode(Node *node) {
 		char ch = prefix[currentindex];
-		cout<<"Current: "<< currentindex<<" "<<ch<< endl;
-		cout<<"\tParent: "<<node->getIndex()<<" "<<node->getData()<<endl;
+		//cout<<"Current: "<< currentindex<<" "<<ch<< endl;
+		//cout<<"\tParent: "<<node->getIndex()<<" "<<node->getData()<<endl;
 		if(isOperator(ch)){
 			if(node->getLeft()==NULL){
 				currentindex++;
 				Node *newNode = new Node(ch);
 				newNode->setIndex(currentindex-1);
 				node->setLeft(newNode);
-				cout<<"\t\tLeft: "<<newNode->getData()<<endl;
+				//cout<<"\t\tLeft: "<<newNode->getData()<<endl;
 				insertNode(newNode);
 				insertNode(node);
 			}
@@ -59,7 +61,7 @@ private:
 				Node *newNode = new Node(ch);
 				newNode->setIndex(currentindex-1);
 				node->setRight(newNode);
-				cout<<"\t\tRight: "<<newNode->getData()<<endl;
+				//cout<<"\t\tRight: "<<newNode->getData()<<endl;
 				insertNode(newNode);
 			}
 			else{
@@ -72,7 +74,7 @@ private:
 				Node *newNode = new Node(ch);
 				newNode->setIndex(currentindex-1);
 				node->setLeft(newNode);
-				cout<<"\t\tLeft: "<<newNode->getData()<<endl;
+				//cout<<"\t\tLeft: "<<newNode->getData()<<endl;
 				insertNode(node);
 			}
 			else if(node->getRight()==NULL && node->getData()!='~'){
@@ -80,11 +82,26 @@ private:
 				Node *newNode = new Node(ch);
 				newNode->setIndex(currentindex-1);
 				node->setRight(newNode);
-				cout<<"\t\tRight: "<<newNode->getData()<<endl;
+				//cout<<"\t\tRight: "<<newNode->getData()<<endl;
 			}
 			return true;
 		}
 		return true;
+	}
+
+	int heightCalculator(Node *node,int height){
+		height++;
+		int leftheight=1;
+		int rightheight=1;
+		if(node->getLeft()!=NULL){
+			leftheight = heightCalculator(node->getLeft(),height);
+		}
+		if(node->getRight()!=NULL){
+			rightheight = heightCalculator(node->getRight(),height);
+		}
+		int currentmaxheight = leftheight>rightheight?leftheight:rightheight;
+		maxheight=maxheight>currentmaxheight?maxheight:currentmaxheight;
+		return currentmaxheight+1;
 	}
 public:
 	bool infixToPrefix(char *infix, char *prefix) {
@@ -142,5 +159,11 @@ public:
 			treeToInfix(node->getRight());
 		}
 		return true;
+	}
+
+	int getTreeHeight(Node *node){
+		maxheight = 1;
+		heightCalculator(node,0);
+		return maxheight;
 	}
 };
