@@ -13,7 +13,6 @@ private:
 	int currentindex;
 	int maxheight;
 	char stack[10000];
-	//char *stack;
 	int tp;
 
 	void push(char elem)
@@ -28,12 +27,18 @@ private:
 	{	/* Function for precedence */
 		switch (elem)
 		{
-		case '#': return 0;
-		case ')': return 1;
-		case '~': return 2;
-		case '*': return 3;
-		case '+': return 4;
-		case '>': return 5;
+		case '#':
+			return 0;
+		case ')':
+			return 1;
+		case '~':
+			return 2;
+		case '*':
+			return 3;
+		case '+':
+			return 4;
+		case '>':
+			return 5;
 		}
 	}
 
@@ -46,41 +51,41 @@ private:
 		char ch = prefix[currentindex];
 		//cout<<"Current: "<< currentindex<<" "<<ch<< endl;
 		//cout<<"\tParent: "<<node->getIndex()<<" "<<node->getData()<<endl;
-		if(isOperator(ch)){
-			if(node->getLeft()==NULL){
+		if (isOperator(ch)) {
+			if (node->getLeft() == NULL) {
 				currentindex++;
 				Node *newNode = new Node(ch);
-				newNode->setIndex(currentindex-1);
+				newNode->setIndex(currentindex - 1);
 				node->setLeft(newNode);
 				//cout<<"\t\tLeft: "<<newNode->getData()<<endl;
 				insertNode(newNode);
 				insertNode(node);
 			}
-			else if(node->getRight()==NULL && node->getData()!='~'){
+			else if (node->getRight() == NULL && node->getData() != '~') {
 				currentindex++;
 				Node *newNode = new Node(ch);
-				newNode->setIndex(currentindex-1);
+				newNode->setIndex(currentindex - 1);
 				node->setRight(newNode);
 				//cout<<"\t\tRight: "<<newNode->getData()<<endl;
 				insertNode(newNode);
 			}
-			else{
+			else {
 				return true;
 			}
 		}
-		if(isalpha(ch)){
-			if(node->getLeft()==NULL){
+		if (isalpha(ch)) {
+			if (node->getLeft() == NULL) {
 				currentindex++;
 				Node *newNode = new Node(ch);
-				newNode->setIndex(currentindex-1);
+				newNode->setIndex(currentindex - 1);
 				node->setLeft(newNode);
 				//cout<<"\t\tLeft: "<<newNode->getData()<<endl;
 				insertNode(node);
 			}
-			else if(node->getRight()==NULL && node->getData()!='~'){
+			else if (node->getRight() == NULL && node->getData() != '~') {
 				currentindex++;
 				Node *newNode = new Node(ch);
-				newNode->setIndex(currentindex-1);
+				newNode->setIndex(currentindex - 1);
 				node->setRight(newNode);
 				//cout<<"\t\tRight: "<<newNode->getData()<<endl;
 			}
@@ -89,20 +94,21 @@ private:
 		return true;
 	}
 
-	int heightCalculator(Node *node,int height){
+	int heightCalculator(Node *node, int height) {
 		height++;
-		int leftheight=1;
-		int rightheight=1;
-		if(node->getLeft()!=NULL){
-			leftheight = heightCalculator(node->getLeft(),height);
+		int leftheight = 1;
+		int rightheight = 1;
+		if (node->getLeft() != NULL) {
+			leftheight = heightCalculator(node->getLeft(), height);
 		}
-		if(node->getRight()!=NULL){
-			rightheight = heightCalculator(node->getRight(),height);
+		if (node->getRight() != NULL) {
+			rightheight = heightCalculator(node->getRight(), height);
 		}
-		int currentmaxheight = leftheight>rightheight?leftheight:rightheight;
-		maxheight=maxheight>currentmaxheight?maxheight:currentmaxheight;
-		return currentmaxheight+1;
+		int currentmaxheight = leftheight > rightheight ? leftheight : rightheight;
+		maxheight = maxheight > currentmaxheight ? maxheight : currentmaxheight;
+		return currentmaxheight + 1;
 	}
+
 public:
 	bool infixToPrefix(char *infix, char *prefix) {
 		Helper helper;
@@ -146,24 +152,63 @@ public:
 	bool prefixToTree(char *prefix, Node *root) {
 		this->prefixlength = strlen(prefix);
 		this->prefix = prefix;
-		currentindex=1;
+		currentindex = 1;
 		root->setData(prefix[0]);
 		root->setIndex(0);
 		insertNode(root);
 	}
 
-	bool treeToInfix(Node *node){
-		if(node!=NULL){
+	bool treeToInfix(Node *node) {
+		if (node != NULL) {
 			treeToInfix(node->getLeft());
-			cout<<node->getData();
+			cout << node->getData();
 			treeToInfix(node->getRight());
 		}
 		return true;
 	}
 
-	int getTreeHeight(Node *node){
+	int getTreeHeight(Node *node) {
 		maxheight = 1;
-		heightCalculator(node,0);
+		heightCalculator(node, 0);
 		return maxheight;
 	}
+
+	bool evaluateTree(Node *node){
+		bool var1=false;
+		bool var2=false;
+		char ch= node->getData();
+
+		if (isOperator(ch) && ch=='~') {
+			var1 = evaluateTree(node->getLeft());
+		}
+		else if (isOperator(ch)) {
+			var1 = evaluateTree(node->getLeft());
+			var2 = evaluateTree(node->getRight());
+		}
+		else if(isalpha(ch)){
+			if(ch=='t'||ch=='T'){
+				return true;
+			}
+			return false;
+		}
+		
+		bool result;
+
+		switch(ch){
+			case '+':
+				result = var1 || var2;
+				break;
+			case '*':
+				result = var1 && var2;
+				break;
+			case '~':
+				result = !var1;
+				break;
+			case '>':
+				result = !var1||var2;
+				break;
+		}
+		return result;
+	}
+
 };

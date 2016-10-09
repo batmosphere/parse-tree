@@ -20,11 +20,13 @@ int main(int argc, char *argv[]) {
 	cout<<infix<<endl;
 	cout<<prefix<<endl;
 	parser.prefixToTree(prefix,root);
-	//parser.treeToInfix(root);
+	parser.treeToInfix(root);
 	int maxheight = parser.getTreeHeight(root);
 	
 	cout<<endl;
 	cout<<"Height: "<<maxheight<<endl;
+	bool rval = parser.evaluateTree(root);
+	cout<<"Truth Value: "<<rval<<endl;
 	cout<<endl;
 	return 0;
 }
