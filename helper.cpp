@@ -9,4 +9,14 @@ public:
 			 *q = *p ^ *q,
 			  *p = *p ^ *q;
 	}
+
+	bool haschar(char* str, char ch){
+		int length = strlen(str);
+		for (int i=0;i<length;i++){
+			if(str[i]==ch){
+				return true;
+			}
+		}
+		return false;
+	}
 };
