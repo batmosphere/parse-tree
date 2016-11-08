@@ -220,65 +220,87 @@ public:
 	}
 
 	bool impl_free(Node *node){
-		if(node->getData()=='>')
-		{
-			node->setData('+');
-			Node *negation = new Node('~');
+		//cout<<"Hi Again"<<endl;
+		//cout<<node->getData()<<endl;
+		if(node==NULL){
+			return false;
+		}
+		if(node->getData()=='>'){
+			//cout<<"Data Matched"<<endl;	
+			char ch= '+';
+			node->setData(ch);
+			//cout<<"Data Changed: "<<node->getData()<<endl;	
+			char c1='~';
+			Node *negation = new Node(c1);
 			negation->setLeft(node->getLeft());
 			node->setLeft(negation);
 
 		}
-		impl_free(node->getLeft());
-		impl_free(node->getRight());
-
+		if (node != NULL) {
+			impl_free(node->getLeft());
+			impl_free(node->getRight());
+		}
+		return true;
 	}
 	bool doublenegation(Node *node){
+		if(node==NULL){
+			return false;
+			
+		}
+
 		if(node->getLeft()->getData() =='~' && node->getLeft()->getLeft()->getData() == '~'){
+			cout<<"hello\n";
 			node->setLeft(node->getLeft()->getLeft()->getLeft());
-			doublenegation(node->getLeft()->getLeft()->getLeft());
+			
 		}
-		else if (node->getRight()->getData()=='~' && node->getRight()->getLeft()->getData() == '~')
-		{
+		if (node->getRight()->getData()=='~' && node->getRight()->getLeft()->getData() == '~')
+		{	
 			node->setRight(node->getRight()->getLeft()->getLeft());
-			doublenegation(node->getRight()->getLeft()->getLeft());
+			cout<<"hello\n";
+			
 		}
-		else if(node->getLeft()->getData() =='~' &&  node->getLeft()->getLeft()->getData() == '+'){
-			node->getLeft()->setData('*');
-			Node *negation1 = new Node('~');
-			Node *negation2 = new Node('~');
-			node->getLeft()->setLeft(negation1);
-			node->getLeft()->setRight(negation2);
-			negation1->setLeft(node->getLeft()->getLeft()->getLeft());
+		if (node != NULL) {
+			doublenegation(node->getLeft());
+			doublenegation(node->getRight());
+		}
+		// // else if(node->getLeft()->getData() =='~' &&  node->getLeft()->getLeft()->getData() == '+'){
+		// 	node->getLeft()->setData('*');
+		// 	Node *negation1 = new Node('~');
+		// 	Node *negation2 = new Node('~');
+		// 	node->getLeft()->setLeft(negation1);
+		// 	node->getLeft()->setRight(negation2);
+		// 	negation1->setLeft(node->getLeft()->getLeft()->getLeft());
 				
-			negation2->setLeft(node->getLeft()->getLeft()->getRight());
-		}
-		else if(node->getRight()->getData() =='~' &&  node->getRight()->getLeft()->getData() == '+'){
-			node->getRight()->setData('*');
-			Node *negation1 = new Node('~');
-			Node *negation2 = new Node('~');
-			node->getRight()->setLeft(negation1);
-			node->getRight()->setRight(negation2);
-			negation1->setLeft(node->getRight()->getLeft()->getLeft());	
-			negation2->setLeft(node->getRight()->getLeft()->getRight());
-		}
-		else if(node->getRight()->getData() =='~' &&  node->getRight()->getLeft()->getData() == '*'){
-			node->getRight()->setData('+');
-			Node *negation1 = new Node('~');
-			Node *negation2 = new Node('~');
-			node->getRight()->setLeft(negation1);
-			node->getRight()->setRight(negation2);
-			negation1->setLeft(node->getRight()->getLeft()->getLeft());	
-			negation2->setLeft(node->getRight()->getLeft()->getRight());
-		}
-		else if(node->getRight()->getData() =='~' &&  node->getRight()->getLeft()->getData() == '*'){
-			node->getRight()->setData('+');
-			Node *negation1 = new Node('~');
-			Node *negation2 = new Node('~');
-			node->getRight()->setLeft(negation1);
-			node->getRight()->setRight(negation2);
-			negation1->setLeft(node->getRight()->getLeft()->getLeft());	
-			negation2->setLeft(node->getRight()->getLeft()->getRight());
-		}
+		// 	negation2->setLeft(node->getLeft()->getLeft()->getRight());
+		// }
+		// else if(node->getRight()->getData() =='~' &&  node->getRight()->getLeft()->getData() == '+'){
+		// 	node->getRight()->setData('*');
+		// 	Node *negation1 = new Node('~');
+		// 	Node *negation2 = new Node('~');
+		// 	node->getRight()->setLeft(negation1);
+		// 	node->getRight()->setRight(negation2);
+		// 	negation1->setLeft(node->getRight()->getLeft()->getLeft());	
+		// 	negation2->setLeft(node->getRight()->getLeft()->getRight());
+		// }
+		// else if(node->getRight()->getData() =='~' &&  node->getRight()->getLeft()->getData() == '*'){
+		// 	node->getRight()->setData('+');
+		// 	Node *negation1 = new Node('~');
+		// 	Node *negation2 = new Node('~');
+		// 	node->getRight()->setLeft(negation1);
+		// 	node->getRight()->setRight(negation2);
+		// 	negation1->setLeft(node->getRight()->getLeft()->getLeft());	
+		// 	negation2->setLeft(node->getRight()->getLeft()->getRight());
+		// }
+		// else if(node->getRight()->getData() =='~' &&  node->getRight()->getLeft()->getData() == '*'){
+		// 	node->getRight()->setData('+');
+		// 	Node *negation1 = new Node('~');
+		// 	Node *negation2 = new Node('~');
+		// 	node->getRight()->setLeft(negation1);
+		// 	node->getRight()->setRight(negation2);
+		// 	negation1->setLeft(node->getRight()->getLeft()->getLeft());	
+		// 	negation2->setLeft(node->getRight()->getLeft()->getRight());
+		// }
+		return true;
 	}	
 	
 	

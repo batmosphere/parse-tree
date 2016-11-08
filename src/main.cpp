@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 	int maxheight = parser.getTreeHeight(root);
 	bool truthvalue = parser.evaluateTree(root);
 	parser.impl_free(root);
-	parser.doublenegation(root);
+	//parser.doublenegation(root);
 	parser.treeToInfix(root, cnf1);
 	int cnfheight = parser.getTreeHeight (root);
 	Helper helper;
