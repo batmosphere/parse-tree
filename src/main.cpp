@@ -28,9 +28,9 @@ int main(int argc, char *argv[]) {
 	parser.treeToInfix(root, newinfix);
 	int maxheight = parser.getTreeHeight(root);
 	bool truthvalue = parser.evaluateTree(root);
-	flag1=parser.impl_free(root);
+	parser.impl_free(root);
 	// parser.treeToInfix(root, cnf2);
-	flag2=parser.doublenegation(root);
+	parser.doublenegation(root);
 	// cout<<"hello again\n";
 	parser.treeToInfix(root, cnf1);
 	int cnfheight = parser.getTreeHeight (root);
@@ -49,11 +49,11 @@ int main(int argc, char *argv[]) {
 	// if (helper.haschar(options, '6')) cout << "impl free: " << cnf2 << endl;
 	if (helper.haschar(options, '6')) cout << "CNF of logic formula: " << cnf1 << endl;
 	if (helper.haschar(options, '7')) cout << "CNF tree height: " << cnfheight << endl;
-	if (helper.haschar(options, '8')) {	cout << "Validity of propositional logic formula: ";
-	if(flag1 && flag2 )
-		cout<<" Valid "<<endl;
-	else
-		cout<<" Not Valid "<<endl;
-	}
+	// if (helper.haschar(options, '8')) {	cout << "Validity of propositional logic formula: ";
+	// if(flag1 && flag2 )
+	// 	cout<<" Valid "<<endl;
+	// else
+	// 	cout<<" Not Valid "<<endl;
+	// }
 	return 0;
 }
