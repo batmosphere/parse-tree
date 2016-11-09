@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
 	// parser.treeToInfix(root, cnf2);
 	parser.doublenegation(root);
 	// cout<<"hello again\n";
+	parser.distr(root);
 	parser.treeToInfix(root, cnf);
 	int cnfheight = parser.getTreeHeight (root);
-	
 	Helper helper;
 	options = argv[2];
 	if (strlen(options) == 0) {

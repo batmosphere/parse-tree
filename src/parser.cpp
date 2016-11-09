@@ -320,7 +320,7 @@ public:
 			if( ((int)newinfix[i] >= 65 && (int)newinfix[i] <= 90 ) || ((int)newinfix[i] >= 97 && (int)newinfix[i] <= 122 ))
 			{	
 				if(rand() % 2){
-					cout<<rand()%2;
+					//cout<<rand()%2;
 					newinfix[i]='f';
 				}
 				else
@@ -336,4 +336,34 @@ public:
 		return l;
 	}
 
+	bool distr(Node *node){
+	if(node== NULL)
+	return false;
+	
+		if(node->getData() == '+' && node->getLeft()->getData()=='*'){
+			node->setData('*');
+			Node *add = new Node('+');
+			node->getLeft()->setData('+');
+			add->setLeft(node->getLeft()->getRight());
+			node->getLeft()->setRight(node->getRight());
+			add->setRight(node->getRight());
+			node->setRight(add);
+			
+		}
+		if(node->getData() == '+' && node->getRight()->getData()=='*'){
+			node->setData('*');
+			Node *add = new Node('+');
+			node->getRight()->setData('+');
+			add->setRight(node->getRight()->getLeft());
+			node->getRight()->setLeft(node->getLeft());
+			add->setLeft(node->getLeft());
+			node->setLeft(add);
+		}
+		if (node != NULL) {
+			distr(node->getLeft());
+			distr(node->getRight());
+		}
+		return true;
+		
+}	
 };
