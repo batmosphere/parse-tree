@@ -1,6 +1,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
+#include <stdlib.h>
 using namespace std;
 
 class Parser {
@@ -8,11 +9,12 @@ private:
 	Node *root;
 	char *infix;
 	char *prefix;
-	char newinfix[10000];
+	char newinfix[20];
 	int prefixlength;
 	int currentindex;
 	int maxheight;
 	char stack[10000];
+	char sprefix[20];
 	int tp;
 
 	void push(char elem)
@@ -312,6 +314,26 @@ public:
 		return true;
 	}	
 	
-	
+	int validity(char *newinfix){
+		
+		for(int i=0; i<20;i++){
+			if( ((int)newinfix[i] >= 65 && (int)newinfix[i] <= 90 ) || ((int)newinfix[i] >= 97 && (int)newinfix[i] <= 122 ))
+			{	
+				if(rand() % 2){
+					cout<<rand()%2;
+					newinfix[i]='f';
+				}
+				else
+					newinfix[i] = 't';
+			}
+
+		}
+		infixToPrefix(newinfix,sprefix);
+		Node *root1 = new Node();
+		prefixToTree(sprefix,root1);
+		
+		int l = evaluateTree(root1);
+		return l;
+	}
 
 };

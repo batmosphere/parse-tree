@@ -7,15 +7,14 @@
 #include "parser.cpp"
 using namespace std;
 
-bool flag1=false, flag2=false, flag3=false;
+int flag = 1,k=0;
 int main(int argc, char *argv[]) {
 	char c = 'x';
 	char *infix;
 	char *options;
-	char prefix[10000];
-	char newinfix[10000];
-	char cnf1[10000];
-	// char cnf2[10000];
+	char prefix[20];
+	char newinfix[20];
+	char cnf[20];
 	if (argc != 3) {
 		cout << "Error: specify infix string and output options." << endl;
 		return 1;
@@ -32,8 +31,9 @@ int main(int argc, char *argv[]) {
 	// parser.treeToInfix(root, cnf2);
 	parser.doublenegation(root);
 	// cout<<"hello again\n";
-	parser.treeToInfix(root, cnf1);
+	parser.treeToInfix(root, cnf);
 	int cnfheight = parser.getTreeHeight (root);
+	
 	Helper helper;
 	options = argv[2];
 	if (strlen(options) == 0) {
@@ -47,13 +47,22 @@ int main(int argc, char *argv[]) {
 	if (helper.haschar(options, '4')) cout << "normal Tree Height: " << maxheight << endl;
 	if (helper.haschar(options, '5')) cout << "Truth Value: " << truthvalue << endl;
 	// if (helper.haschar(options, '6')) cout << "impl free: " << cnf2 << endl;
-	if (helper.haschar(options, '6')) cout << "CNF of logic formula: " << cnf1 << endl;
+	if (helper.haschar(options, '6')) cout << "CNF of logic formula: " << cnf << endl;
 	if (helper.haschar(options, '7')) cout << "CNF tree height: " << cnfheight << endl;
-	// if (helper.haschar(options, '8')) {	cout << "Validity of propositional logic formula: ";
-	// if(flag1 && flag2 )
-	// 	cout<<" Valid "<<endl;
-	// else
-	// 	cout<<" Not Valid "<<endl;
-	// }
+	if (helper.haschar(options, '8')) {	
+	for(k=0;k<50;k++)
+	{
+		flag = parser.validity( newinfix );
+		//cout<<"ASDFSDFSDFSDF\n";
+		if(flag==0)
+			break;
+	}
+
+	cout << "Validity of propositional logic formula: ";
+	if(!flag)
+		cout<<" Valid "<<endl;
+	else
+		cout<<" Not Valid "<<endl;
+	}
 	return 0;
 }
