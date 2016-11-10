@@ -1,33 +1,32 @@
-mukund@kothari:~/Desktop/parse-tree$ g++ ui/src/main.cpp -o dist/parsetree
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree 
-Error: specify infix string and output options.
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b"
-Error: specify infix string and output options.
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b" 12345
-Infix String: a+b
-Prefix String: +ab
-New Infix String: a+b
-Tree Height: 2
+mukund@kothari:~/Desktop/Lic assignment complete/parse-tree/src$ g++ main.cpp
+mukund@kothari:~/Desktop/Lic assignment complete/parse-tree/src$ ./a.out "(~p)>q" 12345678
+Infix String: (~p)>q
+Prefix String: >~pq
+New Infix String: p~>q
+normal Tree Height: 3
 Truth Value: 0
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b" 1
-Infix String: a+b
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b" 2
-Prefix String: +ab
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b" 3
-New Infix String: a+b
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b" 4
-Tree Height: 2
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b" 5
+CNF of logic formula: p+q
+CNF tree height: 2
+Validity of propositional logic formula:  Not Valid 
+
+mukund@kothari:~/Desktop/Lic assignment complete/parse-tree/src$ ./a.out "(~((~p)+q))>(~(p>q))" 12345678
+Infix String: (~((~p)+q))>(~(p>q))
+Prefix String: >~+~pq~>pq
+New Infix String: p~+q~>p>q~
+normal Tree Height: 5
+Truth Value: 1
+CNF of logic formula: p~+q+p*p~+q+q~
+CNF tree height: 5
+Validity of propositional logic formula:  Valid 
+
+mukund@kothari:~/Desktop/Lic assignment complete/parse-tree/src$ ./a.out "(p+(~p))>(q*(~q))" 12345678
+Infix String: (p+(~p))>(q*(~q))
+Prefix String: >+p~p*q~q
+New Infix String: p+p~>q*q~
+normal Tree Height: 4
 Truth Value: 0
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "a+b" 5243
-Prefix String: +ab
-New Infix String: a+b
-Tree Height: 2
-Truth Value: 0
-mukund@kothari:~/Desktop/parse-tree$ dist/parsetree "~(((~(t+t))*f)+(t+f)+t)" 12345
-Infix String: ~(((~(t+t))*f)+(t+f)+t)
-Prefix String: ~+*~+ttf++tft
-New Infix String: t+t~*f+t+f+t~
-Tree Height: 6
-Truth Value: 0
-mukund@kothari:~/Desktop/parse-tree$
+CNF of logic formula: p~+q*p~+q~*p+p~+q~
+CNF tree height: 5
+Validity of propositional logic formula:  Not Valid 
+
+mukund@kothari:~/Desktop/Lic assignment complete/parse-tree/src$ 
